@@ -1,0 +1,41 @@
+body{
+  font-family: 'Helvetica Neue', Helvetica, Arial;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: white;
+  font-smoothing: antialiased;
+  background: #2b2b2b;
+}
+
+.wrapper{
+  margin: 0 auto;
+  padding: 40px;
+  max-width: 800px;
+}
+
+table{
+  color: #3b3b3b;
+  font-size: 18pt;
+  margin: 0 0 40px 0;
+  width: 100%;
+  display: table;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  @media screen and (max-width: 580px);
+    display: block;
+}
+
+tr{
+	background: yellow;
+}
+
+td{
+  padding: 20px ;
+  text-align: center;
+}
+
+
+th{
+  padding: 30px 20px;
+  background: orange;
+}

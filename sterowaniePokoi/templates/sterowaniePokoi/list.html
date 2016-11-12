@@ -1,0 +1,14 @@
+<head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'sterowaniePokoi/style.css' %}" />
+<meta http-equiv="refresh" content="5">
+</head>
+<body>
+<table>
+{{time}}
+<tr><th>Sensor name</th><th>Current</th><th>Set</th><th>Out Pin</th><th>State</th></tr>
+{% for sensor in sensors_list %}
+<tr> <td>{{sensor.name}}</td><td>{{sensor.getTemp}}</td><td>{{sensor.getSetTemp}}</td><td{% if sensor.outPin == -1 %} style="background:red" {% endif %}>{{sensor.outPin}}<td>   {% if sensor.getState == 1 %} ON {% elif sensor.getState == 0 %} OFF {% else %} - {% endif %}</td> </tr>
+{% endfor %}
+</table>	
+</body>
