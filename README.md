@@ -1,8 +1,12 @@
+General requirements
+=====================
 This repository contains django app 'sterowaniePokoi' that allows one to control temperature using the 1-wire sensors, prerequistes:
 - owserver running on localhost on port 4304
 - python packages: pyownet, RPI
 
-= Apache Config =
+Apache Config
+=================
+<blockquote>
 root@raspberrypi:~/django-ogrzewanie/ogrzewanie# cat /etc/apache2/sites-enabled/sterowanieOgrzewania 
 LoadModule wsgi_module /usr/lib/apache2/modules/mod_wsgi.so
 WSGIScriptAlias /  /root/django-ogrzewanie/ogrzewanie/ogrzewanie/wsgi.py
@@ -14,7 +18,9 @@ Alias /static	/root/sterowanie-static/
 Allow from all
 </Files>
 </Directory>
-
-
-= Cron job =
+</blockquote>
+Cron job
+=========
+<blockquote>
 *  *    * * *   root    cd /root/django-ogrzewanie/ogrzewanie && python manage.py updateOut
+</blockquote>
