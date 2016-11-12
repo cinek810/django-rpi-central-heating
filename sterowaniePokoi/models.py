@@ -18,7 +18,7 @@ class Sensor(models.Model):
 		return self.name
 	def getTemp(self):
 		owproxy=pyownet.protocol.proxy(host="127.0.0.1", port=4304)
-		return float(owproxy.read('/'+self.sensorId+'/temperature'))
+		return round(float(owproxy.read('/'+self.sensorId+'/temperature')),2)
 	def getSetTemp(self):
 		currentTime=datetime.now()
 		setTemp=self.setTemp
