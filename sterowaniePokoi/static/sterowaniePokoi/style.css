@@ -29,9 +29,26 @@ tr{
 	background: yellow;
 }
 
+tr.period{
+	padding: 0px;
+  margin: 0 0 0 0;
+  background: #2b2b2b;
+	
+}
+
+
+
 td{
   padding: 20px ;
   text-align: center;
+}
+
+td.period {
+	background: lightgreen;
+	margin: 0 0 0 0;
+	padding: 0px;
+	text-align:center;
+	font-size:10pt;
 }
 
 
