@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from sterowaniePokoi.models import Sensor,Period
+from sterowaniePokoi.models import Sensor,Period,Pump
 
 import RPi.GPIO as GPIO
 
@@ -22,3 +22,23 @@ class Command(BaseCommand):
 					print "Turing on pin "+str(sensor.outPin)
 			except:
 				print "Exception happend"
+
+		for pump in Pump.objects.all():
+			print "Checking pump:"+str(pump)
+	 		pumpState=0
+	 		for sensor in pump.sensor_set.all():
+				print "\t Checking Sensor:"+str(sensor)
+	 			state=sensor.getState()
+	 			if state == 1:
+	 				pumpState=1
+					print "\t Enabling pump"
+	 		if pumpState == 0:
+	 				GPIO.setup(pump.outPin, GPIO.OUT)
+	 				GPIO.output(pump.outPin,GPIO.LOW)
+					print("Pump off, turning off pin:"+str(pump.outPin))
+	 		else:
+ 
+	 				GPIO.setup(pump.outPin, GPIO.OUT)
+	 				GPIO.output(pump.outPin,GPIO.HIGH)
+					print("Pump on, turning on pin:"+str(pump.outPin))
+

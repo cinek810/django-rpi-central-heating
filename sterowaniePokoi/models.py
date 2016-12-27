@@ -7,8 +7,17 @@ import pyownet
 from datetime import datetime
 
 # Create your models here.
+
+class Pump(models.Model):
+	name=models.CharField(max_length=40, default="Nieznana pompka",null=True)
+	outPin=models.IntegerField(default=-1)	
+	def __str__(self):
+		return self.name
+	
+
 class Sensor(models.Model):
 	sensorId=models.CharField(max_length=30)
+	pumpId=models.ForeignKey(Pump,on_delete=models.CASCADE,null=True)
 	name=models.CharField(max_length=40,default="Nieznany opis")
 	setTemp=models.FloatField(default=19)
 	tolerance=models.FloatField(default=0.5)
@@ -17,9 +26,14 @@ class Sensor(models.Model):
 	def __str__(self):
 		return self.name+" ID:"+self.sensorId
 	def getTemp(self):
-		owproxy=pyownet.protocol.proxy(host="127.0.0.1", port=4304)
-		return round(float(owproxy.read('/'+self.sensorId+'/temperature')),1)
-	def getSetTemp(self):
+		temp=111
+		try:
+			owproxy=pyownet.protocol.proxy(host="127.0.0.1", port=4304)
+			temp=round(float(owproxy.read('/'+self.sensorId+'/temperature')),1)
+		except:
+			temp=111
+		return temp
+ 	def getSetTemp(self):
 		currentTime=datetime.now()
 		setTemp=self.setTemp
 		for period in self.period_set.all():
@@ -40,6 +54,7 @@ class Sensor(models.Model):
 		return self.period_set.order_by('startHour')
 
 		
+	
 		
 		
 
